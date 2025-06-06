@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: AnimatedColorSize(),
+    );
+  }
+}
+
+class AnimatedColorSize extends StatefulWidget {
+  const AnimatedColorSize({super.key});
+
+  @override
+  State<AnimatedColorSize> createState() => _AnimatedColorSizeState();
+}
+
+class _AnimatedColorSizeState extends State<AnimatedColorSize> {
+  bool toggled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Color & Size Animation")),
+      body: Center(
+        child: AnimatedContainer(
+          width: toggled ? 200 : 100,
+          height: toggled ? 200 : 100,
+          color: toggled ? Colors.orange : Colors.green,
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeInOut,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() => toggled = !toggled),
+        child: const Icon(Icons.play_arrow),
+      ),
+    );
+  }
+}
