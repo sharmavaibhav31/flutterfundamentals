@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: AnimatedAlignmentExample(),
+    );
+  }
+}
+
+class AnimatedAlignmentExample extends StatefulWidget {
+  const AnimatedAlignmentExample({super.key});
+
+  @override
+  State<AnimatedAlignmentExample> createState() => _AnimatedAlignmentExampleState();
+}
+
+class _AnimatedAlignmentExampleState extends State<AnimatedAlignmentExample> {
+  bool topLeft = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Alignment Animation")),
+      body: GestureDetector(
+        onTap: () => setState(() => topLeft = !topLeft),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.grey.shade200,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 700),
+            alignment: topLeft ? Alignment.topLeft : Alignment.bottomRight,
+            child: Container(
+              width: 60,
+              height: 60,
+              color: Colors.purple,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
