@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: AnimatedRadiusPadding(),
+    );
+  }
+}
+
+class AnimatedRadiusPadding extends StatefulWidget {
+  const AnimatedRadiusPadding({super.key});
+
+  @override
+  State<AnimatedRadiusPadding> createState() => _AnimatedRadiusPaddingState();
+}
+
+class _AnimatedRadiusPaddingState extends State<AnimatedRadiusPadding> {
+  bool toggled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Radius & Padding Animation")),
+      body: Center(
+        child: GestureDetector(
+          onTap: () => setState(() => toggled = !toggled),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 500),
+            padding: EdgeInsets.all(toggled ? 30 : 10),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(toggled ? 50 : 0),
+            ),
+            child: const Text("Tap Me!", style: TextStyle(color: Colors.white)),
+          ),
+        ),
+      ),
+    );
+  }
+}
